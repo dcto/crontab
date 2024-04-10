@@ -1,0 +1,30 @@
+{
+    "name": "varimax/crontab",
+    "description": "crontab for varimax with swoole",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "swoole",
+        "crontab",
+        "varimax"
+    ],
+    "homepage": "https://varimax.cn",
+    "require": {
+        "php": "^7.3|^8.0",
+        "psr/container": "^1.0|^2.0",
+        "psr/log": "^1.0|^2.0|^3.0"
+    },
+    "require-dev": {
+        "swoole/ide-helper": "*",
+        "varimax/varimax": "dev-master"
+    },
+    "suggest": {
+        "varimax/app": "varimax application",
+        "varimax/varimax": "varimax frameworks"
+    },
+    "autoload": {
+        "psr-4": {
+            "VM\\Crontab\\": "src/"
+        }
+    }
+}
