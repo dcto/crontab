@@ -46,10 +46,8 @@ class Scheduler
             $time = $this->parser->parse($crontab->crontab, time());
             if ($time) {
                 foreach ( $time as $t ) {
-                    $result[] = $crontab;
-                    $diff = Carbon::now()->diffInRealSeconds($t, false);
-                    echo $t.PHP_EOL;
-                    // Timer::after($diff > 0 ? $diff * 1000 : 1, [$crontab, 'execute']);
+                    $crontab->runat = Carbon::now()->diffInRealSeconds($t, false);
+                    $result[] = clone $crontab;
                 }
             }
         }
