@@ -43,7 +43,7 @@ class Scheduler
         $result  = [];
         foreach ($this->app->config->get('crontab', [])  as $crontab) {
             $crontab = $this->app->make($crontab);
-            $time = $this->parser->parse($crontab->crontab, time());
+            $time = $this->parser->parse($crontab->schedule, time(), $crontab->timezone);
             if ($time) {
                 foreach ( $time as $t ) {
                     $crontab->runat = Carbon::now()->diffInRealSeconds($t, false);

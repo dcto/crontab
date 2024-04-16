@@ -38,7 +38,7 @@ class CrontabDispatcher
                 $crontabs = $this->scheduler->schedule();
                 while (!$crontabs->isEmpty()) {
                     $crontab = $crontabs->dequeue();
-                    \Swoole\Timer::after($crontab->runat > 0 ? $crontab->runat * 1000 : 1, [$crontab, 'execute']);
+                    \Swoole\Timer::after($crontab->time > 0 ? $crontab->time * 1000 : 1, [$crontab, 'execute']);
                 }
             }
         } catch (\Throwable $throwable) {

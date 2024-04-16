@@ -3,9 +3,6 @@
 namespace VM\Crontab;
 
 use Carbon\Carbon;
-use DateTime;
-use DateTimeZone;
-use InvalidArgumentException;
 
 class ParserTime
 {
@@ -30,16 +27,16 @@ class ParserTime
     public function parse(string $crontabString, $startTime = null, $timezone = null): array
     {
         if (! $this->isValid($crontabString)) {
-            throw new InvalidArgumentException('Invalid cron string: ' . $crontabString);
+            throw new \InvalidArgumentException('Invalid cron string: ' . $crontabString);
         }
         $startTime = $this->parseStartTime($startTime);
         $date = $this->parseDate($crontabString);
         $result = [];
-        $currentDateTime = new DateTime();
+        $currentDateTime = new \DateTime();
         $currentDateTime->setTimestamp($startTime);
 
         if (isset($timezone)) {
-            $timezone = is_string($timezone) ? new DateTimeZone($timezone) : $timezone;
+            $timezone = is_string($timezone) ? new \DateTimeZone($timezone) : $timezone;
             $currentDateTime->setTimezone($timezone);
         }
 
@@ -132,7 +129,7 @@ class ParserTime
             $startTime = time();
         }
         if (! is_numeric($startTime)) {
-            throw new InvalidArgumentException("\$startTime have to be a valid unix timestamp ({$startTime} given)");
+            throw new \InvalidArgumentException("\$startTime have to be a valid unix timestamp ({$startTime} given)");
         }
         return (int) $startTime;
     }
