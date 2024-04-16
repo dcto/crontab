@@ -46,7 +46,7 @@ class Scheduler
             $time = $this->parser->parse($crontab->schedule, time(), $crontab->timezone);
             if ($time) {
                 foreach ( $time as $t ) {
-                    $crontab->runat = Carbon::now()->diffInRealSeconds($t, false);
+                    $crontab->time = Carbon::now()->diffInRealSeconds($t, false);
                     $result[] = clone $crontab;
                 }
             }
