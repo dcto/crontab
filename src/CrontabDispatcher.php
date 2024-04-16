@@ -30,7 +30,7 @@ class CrontabDispatcher
     public function handle(): void
     {
         try {
-            echo 'Crontab dispatcher schedule [' . count($this->app->config->get('crontab') ?? []) .'] crontabs.' . PHP_EOL;
+            printf('Crontab dispatcher schedule [%d] crontabs get going %ds...'.PHP_EOL, count($this->app->config->get('crontab')), 60 - date('s'));
             while (true) {
                 if ($this->sleep()) {
                     break;
@@ -54,9 +54,7 @@ class CrontabDispatcher
 
     protected function sleep()
     {
-        $current = date('s', time());
-        $sleep   = 60 - $current;
-        echo 'Crontab dispatcher schedule get going ' . $sleep . 's.'.PHP_EOL;
+        $sleep   = 60 - date('s');
         if ($sleep > 0) {
             if ($this->app->make(Coordinator::class)->yield($sleep)) {
                 return true;
